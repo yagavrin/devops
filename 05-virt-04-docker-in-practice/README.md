@@ -10,6 +10,7 @@
 ## Задача 4
 Выполнение sql-запроса на Yandex Cloud ВМ
 ![дз5р4](https://github.com/user-attachments/assets/d2f3c541-3f0b-47ce-81f6-c5640cb494b7)
+
 Ссылка на bash скрипт для деплоя
 
 https://github.com/yagavrin/shvirtd-example-python/blob/main/deploy-script.sh
