@@ -20,7 +20,9 @@ https://github.com/yagavrin/shvirtd-example-python/blob/main/deploy-script.sh
 https://github.com/yagavrin/shvirtd-example-python
 
 ## Задача 5 (*)
-Так как образ schnitzler/mysqldump не поддерживает плагин caching_sha2_password, который нужен для авторизации на последней версии mysql сервера, было принято решение использовать оф. образ mysql, где уже установлен mysqldump
+Так как образ schnitzler/mysqldump не поддерживает плагин caching_sha2_password, который нужен для авторизации на последней версии mysql сервера, было принято решение использовать оф. образ mysql, где уже установлен mysqldump. Для хранения конфигурации подключения к бд и пароля используется файл db.conf, который не будет храниться в гит
+
+https://github.com/yagavrin/shvirtd-example-python/blob/main/db.conf
 
 Ссылка на bash скрипт
 
