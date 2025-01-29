@@ -1,0 +1,1 @@
+remote_docker_host="test_root@51.250.47.89"
