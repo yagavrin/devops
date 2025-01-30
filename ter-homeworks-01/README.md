@@ -71,7 +71,7 @@ keep_locally (Boolean) If true, then the Docker image won't be deleted on destro
 
 6. Зайдите на вашу ВМ , подключитесь к контейнеру и проверьте наличие секретных env-переменных с помощью команды env. Запишите ваш финальный код в репозиторий.
 
-Ссылка на код: 
+Ссылка на код: https://github.com/yagavrin/devops/tree/main/ter-homeworks-01/remote-terraform
    
 ![ter-02_01](https://github.com/user-attachments/assets/ec250fd5-17d0-4003-9c20-15305eddfacd)
 
