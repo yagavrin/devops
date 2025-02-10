@@ -1,3 +1,7 @@
+Репозиторий с кодом:
+
+https://github.com/yagavrin/devops/tree/main/ter-homeworks-02
+
 ## Задание 1
 
 4. Ошибки:
