@@ -1,6 +1,6 @@
 Ссылка на репозиторий: 
 
-
+https://github.com/yagavrin/devops/tree/terraform-03/ter-homeworks-03
 
 ## Задание 1
 
