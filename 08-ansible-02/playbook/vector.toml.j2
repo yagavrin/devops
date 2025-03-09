@@ -1,0 +1,17 @@
+# vector.toml.j2
+[sources.my_source]
+type = "file"
+include = ["{{ vector_log_path }}"]
+ignore_older_secs = 600
+
+[transforms.my_transform]
+type = "remap"
+inputs = ["my_source"]
+source = '''
+. = parse_json!(.message)
+'''
+
+[sinks.my_sink]
+type = "console"
+inputs = ["my_transform"]
+encoding.codec = "json"

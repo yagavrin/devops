@@ -1,0 +1,20 @@
+---
+all:
+  hosts:
+    clickhouse-01:
+      ansible_host: "158.160.148.169"
+    vector-01:
+      ansible_host: "158.160.153.109"
+  children:
+    clickhouse:
+      children:
+        clickhouse_prod:
+          hosts:
+            clickhouse-01:
+    vector:
+      children:
+        vector_prod:
+          hosts:
+            vector-01:
+  vars:
+    ansible_user: user
