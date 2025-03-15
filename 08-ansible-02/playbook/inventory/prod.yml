@@ -2,11 +2,11 @@
 all:
   hosts:
     clickhouse-01:
-      ansible_host: "158.160.159.240"
+      ansible_host: "158.160.165.114"
     vector-01:
-      ansible_host: "130.193.35.197"
+      ansible_host: "130.193.35.244"
     lighthouse-01:
-      ansible_host: "130.193.56.167"
+      ansible_host: "84.201.170.36"
   children:
     clickhouse:
       children:
