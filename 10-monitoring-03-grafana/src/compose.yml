@@ -1,0 +1,41 @@
+services:
+  prometheus:
+    image: prom/prometheus
+    restart: on-failure
+    volumes:
+     - ~/prometheus_config:/etc/prometheus
+    networks:
+     - monitoring_net
+  node_exporter:
+    image: prom/node-exporter:latest
+    command:
+      - '--path.rootfs=/host'
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+    volumes:
+      - '/proc:/host/proc:ro'
+      - '/sys:/host/sys:ro'
+      - '/:/host:ro,rslave'
+    pid: host
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    restart: on-failure
+    networks:
+      - monitoring_net
+  grafana:
+    image: grafana/grafana-enterprise
+    volumes:
+      - grafana_vol:/var/lib/grafana
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    restart: on-failure
+    networks:
+     - monitoring_net
+networks:
+  monitoring_net:
+volumes:
+  grafana_vol: 
