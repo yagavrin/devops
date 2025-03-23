@@ -52,7 +52,7 @@
    
 3. Вашей DevOps команде в этом году не выделили финансирование на построение системы сбора логов. Разработчики в свою очередь хотят видеть все ошибки, которые выдают их приложения. Какое решение вы можете предпринять в этой ситуации, чтобы разработчики получали ошибки приложения?
    * Бесплатный тариф Sentry позволяет отслеживать ошибки и отправлять уведомления. Быстро подключается с минимальной конфигурацией
-   * Сбор и чтение логов через встроенные инструменты Docker/Kubernetes (kubectl logs или docker logs)
+   * Сбор и чтение логов через встроенные инструменты Docker/Kubernetes (`kubectl logs` или `docker logs`)
    * Самодельные скрипты, которые будут отправлять уведомление при возникновении ошибок через емейл, Slack и т.д.
 ---
 
@@ -107,3 +107,41 @@
 - Zabbix: Гибридная,	поддерживает и pull, и push.
 - VictoriaMetrics: Гибридная, поддерживает push и pull (через Prometheus).
 - Nagios: Pull, возможна push-модель через плагины.
+
+---
+
+7. Склонируйте себе репозиторий и запустите TICK-стэк, используя технологии docker и docker-compose.
+
+![monitoring-02-tick](https://github.com/user-attachments/assets/31eadb34-07db-4383-8c7b-f503a8add41a)
+
+8. Перейдите в веб-интерфейс Chronograf (http://localhost:8888) и откройте вкладку Data explorer.
+
+![monitoring-02-chronograf](https://github.com/user-attachments/assets/a1518871-790d-44e6-a47a-c1dfde6b1a60)
+
+9. Изучите список telegraf inputs. Добавьте в конфигурацию telegraf следующий плагин - docker:
+
+![monitoring-02-docker](https://github.com/user-attachments/assets/b0726879-a2a2-4318-8354-aa5139b7b2e3)
+
+### Дополнительное задание
+
+1. а) работающий код python3-скрипта https://github.com/yagavrin/devops/blob/main/10-monitoring-02-systems/src/monitoring.py
+   
+   б) конфигурация cron-расписания `* * * * * /usr/bin/python3 /root/monitoring.py`
+
+   в) пример верно сформированного 'YY-MM-DD-awesome-monitoring.log'
+   
+```
+{"timestamp": 1742757662, "avail_memory_percent": 27.59, "available_memory_gb": 1.06, "cpu_usage_percent": 100.0, "cpu_load_1m": "0.00", "cpu_load_5m": "0.08", "cpu_load_15m": "0.09"}
+{"timestamp": 1742757721, "avail_memory_percent": 27.5, "available_memory_gb": 1.05, "cpu_usage_percent": 4.81, "cpu_load_1m": "0.00", "cpu_load_5m": "0.07", "cpu_load_15m": "0.08"}
+{"timestamp": 1742757781, "avail_memory_percent": 27.8, "available_memory_gb": 1.06, "cpu_usage_percent": 5.88, "cpu_load_1m": "0.08", "cpu_load_5m": "0.07", "cpu_load_15m": "0.08"}
+{"timestamp": 1742757841, "avail_memory_percent": 27.47, "available_memory_gb": 1.05, "cpu_usage_percent": 4.3, "cpu_load_1m": "0.03", "cpu_load_5m": "0.05", "cpu_load_15m": "0.07"}
+{"timestamp": 1742757901, "avail_memory_percent": 27.23, "available_memory_gb": 1.04, "cpu_usage_percent": 5.32, "cpu_load_1m": "0.05", "cpu_load_5m": "0.06", "cpu_load_15m": "0.07"}
+{"timestamp": 1742757961, "avail_memory_percent": 23.99, "available_memory_gb": 0.92, "cpu_usage_percent": 6.95, "cpu_load_1m": "0.87", "cpu_load_5m": "0.33", "cpu_load_15m": "0.17"}
+{"timestamp": 1742758021, "avail_memory_percent": 24.53, "available_memory_gb": 0.94, "cpu_usage_percent": 54.68, "cpu_load_1m": "1.95", "cpu_load_5m": "0.78", "cpu_load_15m": "0.34"}
+{"timestamp": 1742758081, "avail_memory_percent": 24.81, "available_memory_gb": 0.95, "cpu_usage_percent": 6.45, "cpu_load_1m": "1.32", "cpu_load_5m": "0.80", "cpu_load_15m": "0.37"}
+{"timestamp": 1742758141, "avail_memory_percent": 25.92, "available_memory_gb": 0.99, "cpu_usage_percent": 12.22, "cpu_load_1m": "1.31", "cpu_load_5m": "0.91", "cpu_load_15m": "0.43"}
+```
+
+2. В веб-интерфейсе откройте вкладку Dashboards. Попробуйте создать свой dashboard
+
+![monitoring-02-dashboard](https://github.com/user-attachments/assets/e7e73bc5-2861-4d77-88b3-8b3f8c04312a)
