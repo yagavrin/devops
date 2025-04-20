@@ -56,3 +56,12 @@
 
 ## Задача 3: API Gateway * (необязательная)
 
+Обновленный исходный код для задания находится по адресу (обновлен сервис security, compose файл и добавлен nginx конфиг): 
+
+https://github.com/yagavrin/devops/tree/main/11-microservices-02/src
+
+Результат выполнения тестовых команд:
+
+![11-ms-bash](https://github.com/user-attachments/assets/a3b36edf-3995-4b91-988b-722ecba01f8d)
+
+
