@@ -1,0 +1,78 @@
+version: "3.8"
+
+services:
+  redis-7000:
+    image: ${REDIS_IMAGE}
+    container_name: redis-7000
+    command: ["redis-server", "/data/redis.conf"]
+    ports:
+      - "7000:7000"
+      - "17000:17000"
+    volumes:
+      - ./conf/7000:/data
+
+  redis-7001:
+    image: ${REDIS_IMAGE}
+    container_name: redis-7001
+    command: ["redis-server", "/data/redis.conf"]
+    ports:
+      - "7001:7001"
+      - "17001:17001"
+    volumes:
+      - ./conf/7001:/data
+
+  redis-7002:
+    image: ${REDIS_IMAGE}
+    container_name: redis-7002
+    command: ["redis-server", "/data/redis.conf"]
+    ports:
+      - "7002:7002"
+      - "17002:17002"
+    volumes:
+      - ./conf/7002:/data
+
+  redis-7003:
+    image: ${REDIS_IMAGE}
+    container_name: redis-7003
+    command: ["redis-server", "/data/redis.conf"]
+    volumes:
+      - ./conf/7003:/data
+
+  redis-7004:
+    image: ${REDIS_IMAGE}
+    container_name: redis-7004
+    command: ["redis-server", "/data/redis.conf"]
+    volumes:
+      - ./conf/7004:/data
+
+  redis-7005:
+    image: ${REDIS_IMAGE}
+    container_name: redis-7005
+    command: ["redis-server", "/data/redis.conf"]
+    volumes:
+      - ./conf/7005:/data
+
+  redis-7006:
+    image: ${REDIS_IMAGE}
+    container_name: redis-7006
+    command: ["redis-server", "/data/redis.conf"]
+    volumes:
+      - ./conf/7006:/data
+
+  redis-7007:
+    image: ${REDIS_IMAGE}
+    container_name: redis-7007
+    command: ["redis-server", "/data/redis.conf"]
+    volumes:
+      - ./conf/7007:/data
+
+  redis-7008:
+    image: ${REDIS_IMAGE}
+    container_name: redis-7008
+    command: ["redis-server", "/data/redis.conf"]
+    volumes:
+      - ./conf/7008:/data
+
+networks:
+  default:
+    name: redis-cluster-net
