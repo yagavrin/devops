@@ -1,0 +1,30 @@
+sources:
+  docker_logs:
+    type: docker_logs
+    include_containers:
+      - es-hot
+      - kibana
+
+transforms:
+  parse:
+    type: remap
+    inputs:
+      - docker_logs
+    source: |
+      . = parse_json!(.message)
+
+sinks:
+  elasticsearch:
+    type: elasticsearch
+    inputs:
+      - parse
+    endpoint: http://es-hot:9200
+    auth:
+      user: "elastic"
+      password: "changeme"
+      strategy: basic  
+    data_stream:
+      type: logs
+      dataset: vector
+      namespace: default
+    compression: gzip

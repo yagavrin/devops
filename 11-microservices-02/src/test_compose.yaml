@@ -1,0 +1,65 @@
+services:
+
+  es-hot:
+    image: elasticsearch:8.7.0
+    container_name: es-hot
+    environment:
+      - node.name=es-hot
+      - node.roles=master,data_content,data_hot  
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "http.host=0.0.0.0"
+      - ELASTIC_PASSWORD=changeme
+      - xpack.security.enabled=true
+      - xpack.security.transport.ssl.enabled=false
+      - xpack.security.http.ssl.enabled=false
+      - discovery.type=single-node
+      - xpack.security.authc.api_key.enabled=true
+    volumes:
+      - data01:/usr/share/elasticsearch/data:Z
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+
+  kibana:
+    image: kibana:8.7.0
+    container_name: kibana
+    ports:
+      - 8081:5601
+    environment:
+      ELASTICSEARCH_HOSTS: '["http://es-hot:9200"]'
+      ELASTICSEARCH_USERNAME: admin
+      ELASTICSEARCH_PASSWORD: qwerty123456
+    networks:
+      - elastic
+    depends_on:
+      - es-hot
+  vector:
+    image: timberio/vector:latest-debian
+    container_name: vector
+    environment:
+      - ELASTICSEARCH_USER=elastic
+      - ELASTICSEARCH_PASSWORD=changeme
+    volumes:
+    - ./vector/vector.yaml:/etc/vector/vector.yaml:Z
+    - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+    - elastic
+    depends_on:
+    - es-hot
+volumes:
+  data01:
+    driver: local
+  data02:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge

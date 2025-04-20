@@ -72,10 +72,47 @@ services:
       - security
     networks:
       - gateway_net
+  prometheus:
+    image: prom/prometheus
+    restart: on-failure
+    volumes:
+     - ./prometheus:/etc/prometheus
+    networks:
+     - gateway_net
+  node_exporter:
+    image: prom/node-exporter:latest
+    command:
+      - '--path.rootfs=/host'
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+    volumes:
+      - '/proc:/host/proc:ro'
+      - '/sys:/host/sys:ro'
+      - '/:/host:ro,rslave'
+    pid: host
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    restart: on-failure
+    networks:
+      - gateway_net
+  grafana:
+    image: grafana/grafana-enterprise
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
+    volumes:
+      - grafana_vol:/var/lib/grafana
+    ports:
+      - 8081:3000
+    restart: on-failure
+    networks:
+     - gateway_net
 volumes:
   data:
   prometheus-data:
-  grafana_data:
+  grafana_vol:
 
 networks:
   gateway_net:
