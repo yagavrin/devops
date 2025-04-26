@@ -4,25 +4,28 @@ sources:
     include_containers:
       - es-hot
       - kibana
+      - api-gateway
+      - src-uploader-1
+      - src-security-1
+      - src-storage-1
 
 transforms:
-  parse:
+  drop_labels:
     type: remap
     inputs:
       - docker_logs
-    source: |
-      . = parse_json!(.message)
+    source: |-
+      del(.label."com.docker.compose.project")
+      del(.label."com.docker.compose.service")
+      del(.label."com.docker.compose.version")
 
 sinks:
   elasticsearch:
     type: elasticsearch
     inputs:
-      - parse
-    endpoint: http://es-hot:9200
-    auth:
-      user: "elastic"
-      password: "changeme"
-      strategy: basic  
+      - drop_labels
+    endpoints:
+      - http://es-hot:9200
     data_stream:
       type: logs
       dataset: vector
