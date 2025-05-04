@@ -1,0 +1,18 @@
+version: '3'
+services:
+  jenkins-agent:
+    image: jenkins/inbound-agent
+    container_name: jenkins-agent
+    user: root
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - JENKINS_URL=http://localhost:8080
+      - JENKINS_SECRET=2b31306ff9e1b382b581c914087098a7979e561ebd2a9d4a6f2f1f37c607885c
+      - JENKINS_AGENT_NAME=agent-01
+      - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+# apt install python3-pip docker.io
+# pip3 install ansible molecule molecule-docker --break-system-packages
