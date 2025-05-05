@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-logger
+  labels:
+    app: node-logger
+spec:
+  selector:
+    matchLabels:
+      app: node-logger
+  template:
+    metadata:
+      labels:
+        app: node-logger
+    spec:
+      containers:
+      - name: multitool
+        image: wbitt/network-multitool:latest
+        command: ["/bin/sh", "-c"]
+        args: ["tail -f /host/var/log/syslog"]
+        volumeMounts:
+        - name: node-logs
+          mountPath: /host/var/log
+          readOnly: true
+      volumes:
+      - name: node-logs
+        hostPath:
+          path: /var/log
