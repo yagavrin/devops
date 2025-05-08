@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pv-app
+  labels:
+    app: pv-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pv-app
+  template:
+    metadata:
+      labels:
+        app: pv-app
+    spec:
+      containers:
+      - name: busybox
+        image: busybox:latest
+        command: ["/bin/sh", "-c"]
+        args: ["while true; do echo $(date) >> /shared-data/log.txt; sleep 5; done"]
+        volumeMounts:
+        - name: pv-app
+          mountPath: /shared-data
+      - name: multitool
+        image: wbitt/network-multitool:latest
+        command: ["/bin/sh", "-c"]
+        args: ["tail -f /shared-data/log.txt"]
+        volumeMounts:
+        - name: pv-app
+          mountPath: /shared-data
+      volumes:
+      - name: pv-app
+        persistentVolumeClaim:
+          claimName: pv-app-claim
