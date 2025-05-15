@@ -6,6 +6,10 @@
 
 https://github.com/yagavrin/devops/blob/main/12-kuber-homeworks-2.3/src/nginx-deployment.yml
 
+2. Решить возникшую проблему с помощью ConfigMap.
+
+https://github.com/yagavrin/devops/blob/main/12-kuber-homeworks-2.3/src/multitool-configmap.yml
+
 3. Продемонстрировать, что pod стартовал и оба конейнера работают.
 
 ![12-kuber-23-3](https://github.com/user-attachments/assets/740ea2a8-cce6-40b4-8012-3754cc3ab5b6)
