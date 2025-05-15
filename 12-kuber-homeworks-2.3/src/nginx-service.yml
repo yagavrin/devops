@@ -10,7 +10,6 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 80
-      nodePort: 80
     - name: multitool-port
       protocol: TCP
       port: 8080
