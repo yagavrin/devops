@@ -124,3 +124,82 @@ variable "vm_resources" {
     disk_size      = 10
   }
 }
+
+# S3
+
+variable "bucket_config" {
+  type = object({
+    name          = string
+    size_gb       = number
+    storage_class = string
+    acl           = string
+  })
+  default = {
+    name          = "yagavrin-23-06"
+    size_gb       = 1
+    storage_class = "STANDARD"
+    acl           = "public-read"
+  }
+  description = "S3 bucket configuration"
+}
+
+variable "service_account" {
+  type = object({
+    name        = string
+    description = string
+  })
+  default = {
+    name        = "s3_sa"
+    description = "Service account for S3 bucket"
+  }
+  description = "Service account configuration for the bucket"
+}
+
+variable "path_to_s3_image" {
+  type = string
+  default = "./cat-in-hat.jpeg"
+}
+
+# Instance Group
+
+variable "instance_group" {
+  type = object({
+    name        = string
+    size        = number
+    image_id    = string
+    platform_id = string
+    memory      = number
+    cores       = number
+    core_fraction = number
+    is_preemptible = bool
+    has_nat        = bool
+    disk_size   = number
+  })
+
+  default = {
+    name        = "lamp-ig"
+    size        = 3
+    image_id    = "fd827b91d99psvq5fjit"
+    platform_id = "standard-v2"
+    memory      = 2
+    cores       = 2
+    core_fraction = 20
+    is_preemptible = true
+    has_nat        = true
+    disk_size   = 10
+  }
+}
+
+# ALB
+
+variable "alb_config" {
+  type = object({
+    name        = string
+    domain      = optional(string, null)
+    http_router_count = number
+  })
+  default = {
+    name = "lamp-alb"
+    http_router_count = 1
+  }
+}

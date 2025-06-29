@@ -7,4 +7,7 @@ locals {
   vm_private_resources = merge(var.vm_resources, {
     name = "vm_private"
   })
+
+  s3_sa_name = "${var.bucket_config.name}-sa"
+  bucket_size_bytes = var.bucket_config.size_gb * 1024 * 1024 * 1024
 }

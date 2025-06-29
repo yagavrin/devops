@@ -1,0 +1,23 @@
+#cloud-config
+users:
+  - name: ${username}
+    groups: sudo
+    shell: /bin/bash
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    ssh_authorized_keys: 
+      ${ssh_public_key}
+write_files:
+  - path: /var/www/html/index.html
+    owner: www-data:www-data
+    permissions: '0644'
+    content: |
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>LAMP Instance</title>
+      </head>
+      <body>
+        <h1>Welcome to LAMP on Yandex Cloud!</h1>
+        <img src="https://${bucket_name}.storage.yandexcloud.net/${bucket_file_key}" style="max-width: 500px;">
+      </body>
+      </html>

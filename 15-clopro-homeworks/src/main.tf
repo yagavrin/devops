@@ -14,5 +14,5 @@ resource "yandex_vpc_subnet" "private_subnet" {
   zone           = var.default_zone
   network_id     = yandex_vpc_network.dev_vpc.id
   v4_cidr_blocks = var.private_subnet.v4_cidr_blocks
-  route_table_id = yandex_vpc_route_table.private-nat-route.id
+  # route_table_id = yandex_vpc_route_table.private-nat-route.id
 }
