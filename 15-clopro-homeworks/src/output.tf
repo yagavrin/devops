@@ -1,13 +1,13 @@
-output "public_url" {
-  value = "https://${yandex_storage_bucket.s3_bucket.bucket}.storage.yandexcloud.net/${yandex_storage_object.image.key}"
-}
+# output "public_url" {
+#   value = "https://${yandex_storage_bucket.s3_bucket.bucket}.storage.yandexcloud.net/${yandex_storage_object.image.key}"
+# }
 
-output "instance_public_ips" {
-  value = [
-    for instance in yandex_compute_instance_group.lamp_ig.instances :
-      instance.network_interface[0].nat_ip_address
-  ]
-}
+# output "instance_public_ips" {
+#   value = [
+#     for instance in yandex_compute_instance_group.lamp_ig.instances :
+#       instance.network_interface[0].nat_ip_address
+#   ]
+# }
 
 # output "load_balancer_ip" {
 #   value = one([
@@ -16,9 +16,9 @@ output "instance_public_ips" {
 #   ])
 # }
 
-output "alb_public_ip" {
-  value = try(
-    one(yandex_alb_load_balancer.lamp_alb.listener[*].endpoint[*].address[*].external_ipv4_address[*].address),
-    "ALB IP not available"
-  )
-}
+# output "alb_public_ip" {
+#   value = try(
+#     one(yandex_alb_load_balancer.lamp_alb.listener[*].endpoint[*].address[*].external_ipv4_address[*].address),
+#     "ALB IP not available"
+#   )
+# }

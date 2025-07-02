@@ -160,6 +160,21 @@ variable "path_to_s3_image" {
   default = "./cat-in-hat.jpeg"
 }
 
+variable "s3_kms_key" {
+  type = object({
+    name              = string
+    description       = string
+    default_algorithm = string
+    rotation_period   = string
+  })
+  default = {
+    name = "s3-kms-key"
+    description       = "Encryption key for S3 bucket"
+    default_algorithm = "AES_256"
+    rotation_period   = "8760h"
+  }
+}
+
 # Instance Group
 
 variable "instance_group" {
@@ -202,4 +217,34 @@ variable "alb_config" {
     name = "lamp-alb"
     http_router_count = 1
   }
+}
+
+# Hosting
+
+variable "hoster_bucket_config" {
+  type = object({
+    name          = string
+    size_gb       = number
+    storage_class = string
+    acl           = string
+  })
+  default = {
+    name          = "xdcfyvgubhijnkml.ru"
+    size_gb       = 1
+    storage_class = "STANDARD"
+    acl           = "public-read"
+  }
+  description = "S3 bucket configuration"
+}
+
+variable "hoster_service_account" {
+  type = object({
+    name        = string
+    description = string
+  })
+  default = {
+    name        = "hosting-sa"
+    description = "Service account for S3 hostiing bucket"
+  }
+  description = "Service account configuration for the bucket"
 }
