@@ -45,6 +45,12 @@ resource "yandex_resourcemanager_folder_iam_member" "vpc-public-admin" {
   member    = "serviceAccount:${yandex_iam_service_account.ha-k8s-account.id}"
 }
 
+resource "yandex_resourcemanager_folder_iam_binding" "k8s-lb-sa-binding" {
+  folder_id = var.folder_id
+  role      = "load-balancer.admin"
+  members   = ["serviceAccount:${yandex_iam_service_account.ha-k8s-account.id}"]
+}
+
 resource "yandex_resourcemanager_folder_iam_member" "images-puller" {
   # Сервисному аккаунту назначается роль "container-registry.images.puller".
   folder_id = var.folder_id

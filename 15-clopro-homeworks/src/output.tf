@@ -37,7 +37,3 @@ output "mysql_cluster_fqdn" {
 output "k8s_cluster_public_ip" {
   value = yandex_kubernetes_cluster.k8s-ha-three-zones.master[0].external_v4_address
 }
-
-output "mysql_cluster_info" {
-  value = yandex_mdb_mysql_cluster.netology_mysql
-}
