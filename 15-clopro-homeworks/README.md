@@ -36,3 +36,6 @@
 <img width="1596" height="593" alt="15-04-php-adm" src="https://github.com/user-attachments/assets/b2ee3307-b07f-4632-8208-33e609ff9665" />
 
  - *Создать сервис-типы Load Balancer и подключиться к phpmyadmin. Предоставить скриншот с публичным адресом и подключением к БД.
+
+<img width="1858" height="703" alt="15-04-balancer" src="https://github.com/user-attachments/assets/72e47967-979c-4c71-ac4d-1b4cefe593d8" />
+
