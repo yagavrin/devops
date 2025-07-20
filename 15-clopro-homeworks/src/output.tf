@@ -22,3 +22,22 @@
 #     "ALB IP not available"
 #   )
 # }
+
+output "netology_db_secrets" {
+  value = {
+    user = data.yandex_lockbox_secret_version.db_user_v1.entries[0].text_value
+    password = data.yandex_lockbox_secret_version.db_password_v1.entries[0].text_value
+  }
+}
+
+output "mysql_cluster_fqdn" {
+  value = yandex_mdb_mysql_cluster.netology_mysql.host[0].fqdn
+}
+
+output "k8s_cluster_public_ip" {
+  value = yandex_kubernetes_cluster.k8s-ha-three-zones.master[0].external_v4_address
+}
+
+output "mysql_cluster_info" {
+  value = yandex_mdb_mysql_cluster.netology_mysql
+}

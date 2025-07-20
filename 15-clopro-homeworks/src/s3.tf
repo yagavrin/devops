@@ -9,7 +9,7 @@
 #   server_side_encryption_configuration {
 #     rule {
 #       apply_server_side_encryption_by_default {
-#         kms_master_key_id = yandex_kms_symmetric_key.s3_key.id
+#         kms_master_key_id = yandex_kms_symmetric_key.kms-key.id
 #         sse_algorithm     = "aws:kms"
 #       }
 #     }
@@ -41,13 +41,6 @@
 #   source = var.path_to_s3_image
 #   acl    = "public-read"
 #   content_type = "image/jpeg"
-# }
-
-# resource "yandex_kms_symmetric_key" "s3_key" {
-#   name              = var.s3_kms_key.name
-#   description       = var.s3_kms_key.description
-#   default_algorithm = var.s3_kms_key.default_algorithm
-#   rotation_period   = var.s3_kms_key.rotation_period
 # }
 
 # # resource "yandex_kms_symmetric_encryption_key_iam_member" "s3_viewer" {
